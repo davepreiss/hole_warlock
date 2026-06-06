@@ -1,4 +1,4 @@
-# Netlify deployment config for the STEP Annotator (Vite + React SPA).
+# Netlify deployment config for Hole Warlock (Vite + React SPA).
 
 [build]
   command = "npm run build"

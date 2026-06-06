@@ -3,9 +3,9 @@
 // EMBEDDING (M0): the metadata JSON is base64-encoded and written as an ISO
 // 10303-21 (Part 21) comment block placed right after the `DATA;` line:
 //
-//   /* METROLOGY-INTEGRATED-V1
+//   /* HOLE-WARLOCK-V1
 //   eyJ...base64...
-//   METROLOGY-INTEGRATED-END */
+//   HOLE-WARLOCK-END */
 //
 // Part-21 permits /* ... */ comments anywhere whitespace is allowed, so the file
 // remains a fully valid STEP file that any CAD tool can open; the comment is
@@ -25,7 +25,7 @@
 import { z } from "zod";
 
 export const SCHEMA_VERSION = "0.6";
-export const GENERATOR = "metrology-integrated v0.0.1";
+export const GENERATOR = "Hole Warlock v0.0.1";
 
 /** What a note points at: a B-rep face or edge, identified by its TopExp index. */
 export const TargetSchema = z.object({
@@ -158,10 +158,12 @@ export function emptyMetadata(): Metadata {
   };
 }
 
-const BEGIN = "/* METROLOGY-INTEGRATED-V1";
-const END = "METROLOGY-INTEGRATED-END */";
+const BEGIN = "/* HOLE-WARLOCK-V1";
+const END = "HOLE-WARLOCK-END */";
 // Matches our whole comment block (incl. surrounding newlines) so we can strip/replace it.
-const BLOCK_RE = /\r?\n?\/\* METROLOGY-INTEGRATED-V1\r?\n[\s\S]*?\r?\nMETROLOGY-INTEGRATED-END \*\//;
+// Also matches the legacy METROLOGY-INTEGRATED marker so files saved before the rename
+// (e.g. the bundled demo/sample parts) still load and get rewritten with the new marker.
+const BLOCK_RE = /\r?\n?\/\* (?:HOLE-WARLOCK|METROLOGY-INTEGRATED)-V1\r?\n([\s\S]*?)\r?\n(?:HOLE-WARLOCK|METROLOGY-INTEGRATED)-END \*\//;
 
 function toBase64(s: string): string {
   // UTF-8 safe base64 for the browser.
@@ -182,10 +184,7 @@ function fromBase64(b64: string): string {
 export function extractMetadata(stepText: string): Metadata | null {
   const m = BLOCK_RE.exec(stepText);
   if (!m) return null;
-  const inner = m[0];
-  const b64 = inner
-    .slice(inner.indexOf(BEGIN) + BEGIN.length, inner.lastIndexOf(END))
-    .trim();
+  const b64 = m[1].trim();
   try {
     const json = JSON.parse(fromBase64(b64));
     migrateLegacy(json);

@@ -42,7 +42,7 @@ writeFileSync(fileURLToPath(new URL("../samples/box.annotated.step", import.meta
 check("starts with ISO-10303-21", annotated.startsWith("ISO-10303-21;"));
 check("has HEADER", annotated.includes("HEADER;"));
 check("has DATA section", annotated.includes("DATA;"));
-check("contains our comment block", annotated.includes("METROLOGY-INTEGRATED-V1"));
+check("contains our comment block", annotated.includes("HOLE-WARLOCK-V1"));
 check("ends STEP cleanly", annotated.trimEnd().endsWith("END-ISO-10303-21;"));
 
 // 3. Our reader recovers the metadata exactly.
@@ -55,7 +55,7 @@ check("annotation faceId preserved", recovered?.annotations[0]?.faceId === 2);
 
 // 4. Idempotency: re-embedding replaces (does not duplicate) the block.
 const twice = embedMetadata(annotated, meta);
-const occurrences = twice.split("METROLOGY-INTEGRATED-V1").length - 1;
+const occurrences = twice.split("HOLE-WARLOCK-V1").length - 1;
 check("re-embed does not duplicate block", occurrences === 1);
 
 // 5. Geometry still valid: OCCT re-reads the annotated file with the same faces.

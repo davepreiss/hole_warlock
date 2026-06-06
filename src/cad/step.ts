@@ -455,7 +455,7 @@ export async function loadStepToMesh(bytes: Uint8Array): Promise<MeshData> {
     const mesh = meshShape(oc, shape);
     // eslint-disable-next-line no-console
     console.log(
-      `[metrology] faces=${mesh.faceCount} edges=${mesh.edgeCount} ` +
+      `[hole-warlock] faces=${mesh.faceCount} edges=${mesh.edgeCount} ` +
         `edgeSegments=${mesh.edgeSegmentIds.length} tris=${mesh.indices.length / 3}`,
     );
     // DEBUG: list vertical edge-segment (x,y) locations actually in the render buffer
@@ -469,7 +469,7 @@ export async function loadStepToMesh(bytes: Uint8Array): Promise<MeshData> {
       if (dx < 1e-3 && dy < 1e-3 && dz > 1) verts.add(`${ep[i].toFixed(2)},${ep[i + 1].toFixed(2)}`);
     }
     // eslint-disable-next-line no-console
-    console.log("[metrology] vertical edge (x,y) locations:", [...verts].sort());
+    console.log("[hole-warlock] vertical edge (x,y) locations:", [...verts].sort());
     try {
       mesh.holes = detectHoles(oc, shape);
     } catch {

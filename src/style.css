@@ -242,6 +242,16 @@ body {
   cursor: not-allowed;
 }
 
+/* Icon-only button (e.g. the GitHub repo link in the header). */
+.btn.icon-only {
+  padding: 7px;
+  color: var(--subtle);
+  text-decoration: none;
+}
+.btn.icon-only:hover {
+  color: var(--text);
+}
+
 .body {
   flex: 1;
   display: flex;
