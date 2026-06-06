@@ -1,0 +1,6 @@
+typeof STEPControl_Controller = function
+typeof STEPControl_Controller.Init = function
+Init() returned: true
+ReadFile('model.step') status = 1
+OCCT messages during read: 0
+DONE

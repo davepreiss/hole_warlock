@@ -1,0 +1,11 @@
+file: H:\Shared drives\Variable Machines\Engineering\Native CAD Files\External Colaborations\Persues Materials\P0_Assembly\Motor_Plate_Mount.STEP bytes: 179673
+non-ASCII bytes: 0 firstAt: -1
+utf8 path: orig 179673 -> annotated bytes 179925 (delta vs +block ~) 252
+latin1 path: annotated bytes 179925
+extract(utf8) ok: M6x1 tapped, 12 deep
+extract(latin1) ok: M6x1 tapped, 12 deep
+faces original: 62
+faces utf8-annotated: 62
+  OCCT read FAILED for latin1.step status 2
+faces latin1-annotated: -1
+DONE

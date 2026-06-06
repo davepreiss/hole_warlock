@@ -1,0 +1,1106 @@
+:root {
+  --bg: #15181c;
+  --panel: #1e2227;
+  --panel2: #262b31;
+  --line: #333a42;
+  --text: #e6e9ec;
+  --subtle: #8a939d;
+  --accent: #2f7bf6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+}
+
+.topbar .spacer {
+  flex: 1;
+}
+
+.segmented {
+  display: inline-flex;
+  margin-left: 14px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.seg {
+  padding: 6px 14px;
+  background: var(--panel2);
+  border: none;
+  color: var(--subtle);
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.seg.on {
+  background: var(--accent);
+  color: #fff;
+}
+
+.seg:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ---- Bottom aesthetics panel ---- */
+.bottombar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 8px 14px;
+  background: var(--panel);
+  border-top: 1px solid var(--line);
+}
+
+.bottombar .bb-title {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--subtle);
+}
+
+.bottombar .bb-ctl {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: var(--subtle);
+  font-size: 12px;
+}
+
+.bottombar .bb-ctl input[type="range"] {
+  width: 130px;
+  cursor: pointer;
+}
+
+.bottombar .bb-hint {
+  font-size: 11px;
+  color: var(--subtle);
+}
+
+.bottombar .bb-val {
+  min-width: 36px;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.bottombar .spacer {
+  flex: 1;
+}
+
+.bottombar .bb-check {
+  gap: 6px;
+  cursor: pointer;
+}
+
+.bottombar .bb-check input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  cursor: pointer;
+  accent-color: var(--accent);
+}
+
+.topbar .brand {
+  /* Dark-magic wordmark: a jagged, spiky display face + a necrotic venom-green fill
+     with a low, eerie glow. Header only — the PDF/title-block uses the plain APP_NAME. */
+  font-family: "Metal Mania", "Times New Roman", serif;
+  font-weight: 400;
+  font-size: 21px;
+  letter-spacing: 0.03em;
+  /* Punchy white highlight up top dropping fast into a deep arcane purple. */
+  background: linear-gradient(180deg, #ffffff 0%, #ffffff 18%, #c4a8ff 42%, #7c3aed 72%, #3b0a5e 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  text-shadow: 0 0 10px rgba(139, 92, 246, 0.35);
+}
+
+/* Flanking lightning-bolt sigils — not part of APP_NAME, so they never reach the PDF. */
+.topbar .brand::before,
+.topbar .brand::after {
+  content: "\03DF"; /* ϟ — a jagged bolt glyph (monochrome, not an emoji) */
+  -webkit-text-fill-color: #c4b5fd;
+  color: #c4b5fd;
+  font-size: 0.95em;
+  text-shadow: 0 0 8px rgba(139, 92, 246, 0.6);
+}
+.topbar .brand::before {
+  margin-right: 0.45em;
+}
+.topbar .brand::after {
+  margin-left: 0.45em;
+  display: inline-block;
+  transform: scaleX(-1); /* mirror so the two bolts point outward */
+}
+
+/* ---- Drawing overlay ---- */
+.draw-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: none;
+}
+
+.draw-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.draw-leader {
+  stroke: #111;
+  stroke-width: var(--leader-weight, 1.2);
+}
+
+.draw-arrow {
+  fill: #111;
+}
+
+.draw-label {
+  position: absolute;
+  pointer-events: auto;
+  cursor: move;
+  color: #111;
+  padding: 1px 3px;
+  font-family: "Century Gothic", "Questrial", "Apple SD Gothic Neo", "URW Gothic", sans-serif;
+  font-size: var(--label-size, 12px);
+  line-height: 1.35;
+  white-space: pre;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.draw-arrow-handle {
+  fill: transparent;
+  cursor: grab;
+  pointer-events: auto;
+}
+
+.subtle {
+  color: var(--subtle);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.btn:hover {
+  border-color: var(--accent);
+}
+
+.btn.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.body {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+.viewport {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Drawing mode shows a letterboxed "sheet" (gray surround); model mode fills. */
+.viewport.drawing {
+  background: #565d68;
+  overflow: auto;
+  display: flex;
+  /* sheet.paper uses margin:auto to center when smaller, and scrolls when larger */
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.sheet {
+  position: absolute;
+  inset: 0;
+}
+
+.sheet.paper {
+  position: relative;
+  inset: auto;
+  background: #fff;
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.45);
+  /* Center in the viewport when smaller than viewport; scroll when larger. */
+  margin: auto;
+  flex-shrink: 0;
+}
+
+/* The live 3D view occupies the sheet's drawing area (matches the PDF image rect). */
+.sheet-draw {
+  position: absolute;
+  inset: 0;
+}
+
+.sheet.paper .sheet-draw {
+  inset: auto;
+}
+
+.sheet-chrome {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.drop-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(47, 123, 246, 0.18);
+  border: 3px dashed var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.drop-message {
+  background: var(--panel);
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  padding: 18px 36px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #cfe0ff;
+  letter-spacing: 0.02em;
+}
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--subtle);
+  padding: 24px;
+  text-align: center;
+}
+
+.toast {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid var(--line);
+  padding: 8px 14px;
+  border-radius: 6px;
+}
+
+.toast.error {
+  border-color: #d9534f;
+  color: #ffb3b1;
+  max-width: 80%;
+}
+
+.toast.info {
+  border-color: var(--accent);
+  color: #cfe0ff;
+  max-width: 80%;
+}
+
+.panel {
+  width: 320px;
+  flex-shrink: 0;
+  background: var(--panel);
+  border-left: 1px solid var(--line);
+  padding: 14px;
+  overflow-y: auto;
+  /* Thin, unobtrusive scrollbar (only appears when content actually overflows). */
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+
+.panel::-webkit-scrollbar {
+  width: 8px;
+}
+
+.panel::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 4px;
+}
+
+.panel::-webkit-scrollbar-thumb:hover {
+  background: #424b55;
+}
+
+.panel::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.panel h3 {
+  margin: 0 0 2px;
+  word-break: break-all;
+}
+
+.panel h4 {
+  margin: 18px 0 8px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--subtle);
+}
+
+.panel section {
+  border-top: 1px solid var(--line);
+  padding-top: 4px;
+}
+
+.panel label {
+  display: block;
+  margin: 8px 0;
+  color: var(--subtle);
+  font-size: 12px;
+}
+
+.panel input,
+.panel textarea,
+.panel select {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 7px 9px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  color: var(--text);
+  font: inherit;
+  resize: vertical;
+}
+
+.panel select {
+  cursor: pointer;
+}
+
+/* Part number + Rev share a row, Rev narrow. */
+.panel .row2 {
+  display: flex;
+  gap: 8px;
+}
+.panel .row2 > label {
+  flex: 1;
+}
+.panel .row2 > label.rev-field {
+  flex: 0 0 64px;
+}
+
+/* Multi-line note fields grow with their content instead of showing a scrollbar. */
+.panel textarea {
+  field-sizing: content;
+  resize: none;
+  overflow: hidden;
+}
+
+.panel input:focus,
+.panel textarea:focus,
+.panel select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+ul.notes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul.notes li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  margin-bottom: 6px;
+  cursor: pointer;
+}
+
+ul.notes li.active {
+  border-color: var(--accent);
+}
+
+ul.notes li.hidden-ann .note-text,
+ul.notes li.hidden-ann .tag {
+  opacity: 0.4;
+}
+
+ul.notes li.marked {
+  border-color: #d9534f;
+  background: rgba(217, 83, 79, 0.08);
+}
+
+ul.notes li .note-text {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Per-row "select for deletion" checkbox. Selector must out-specify `.panel input`
+   (which sets display:block + width:100%), or the box stretches the whole row. */
+.panel input.ann-select {
+  appearance: auto;
+  -webkit-appearance: checkbox;
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 15px;
+  height: 15px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  accent-color: #d9534f;
+}
+
+/* Per-row hide toggle (eye). */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: none;
+  border-radius: 5px;
+  background: none;
+  color: var(--subtle);
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+}
+
+.icon-btn:hover {
+  background: var(--panel2);
+  color: var(--text);
+}
+
+.icon-btn.off {
+  color: #5c656f;
+}
+
+/* Destructive action button. */
+.btn.danger {
+  width: 100%;
+  justify-content: center;
+  margin-top: 2px;
+  color: #ff8a87;
+  border-color: #d9534f;
+  background: rgba(217, 83, 79, 0.12);
+}
+
+.btn.danger:not(:disabled):hover {
+  color: #fff;
+  background: #d9534f;
+  border-color: #d9534f;
+}
+
+.unit-select {
+  padding: 7px 10px;
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.type-badge {
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 0 5px;
+  font-size: 11px;
+  color: var(--subtle);
+}
+
+.btn.small {
+  padding: 5px 9px;
+  font-size: 12px;
+  width: 100%;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+h4.collapsible {
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+h4.collapsible .caret {
+  font-size: 10px;
+}
+
+.hole-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 7px 8px;
+  margin-bottom: 6px;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+  font-size: 12px;
+}
+
+.hole-tile:hover {
+  background: rgba(255, 255, 255, 0.045);
+  border-color: #424b55;
+}
+
+.hole-tile.active {
+  border-color: var(--accent);
+}
+
+.hole-head {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+}
+
+.hole-head strong {
+  font-weight: 600;
+}
+
+.hole-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hole-right .qty {
+  color: var(--subtle);
+  font-variant-numeric: tabular-nums;
+}
+
+.hole-right .chip {
+  margin-left: 0;
+}
+
+.feature-line {
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--text);
+}
+
+.callout-edit {
+  display: block;
+  width: 100%;
+  margin: 2px 0 6px;
+  padding: 7px 8px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  color: var(--text);
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.4;
+  field-sizing: content;
+  resize: none;
+  overflow: hidden;
+}
+
+.callout-edit:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.note-text {
+  white-space: pre-wrap;
+}
+
+.swatch {
+  width: 11px;
+  height: 11px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  margin-right: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+/* Scoped under .hole-tile so these beat the generic .panel label / .panel input rules. */
+.hole-tile .depth-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0;
+  color: var(--subtle);
+  font-size: 12px;
+}
+
+.hole-tile .depth-row input {
+  margin: 0;
+  width: 84px;
+  padding: 3px 7px;
+  font-size: 12px;
+}
+
+.hole-tile .btn.small {
+  margin: 0;
+  font-size: 12px;
+}
+
+.chip {
+  margin-left: auto;
+  border: 1px solid;
+  border-radius: 10px;
+  padding: 1px 8px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* Per-category pill colors. */
+.chip-tap {
+  background: rgba(47, 123, 246, 0.18);
+  border-color: #2f7bf6;
+  color: #cfe0ff;
+}
+.chip-clearance {
+  background: rgba(43, 179, 138, 0.18);
+  border-color: #2bb38a;
+  color: #b9ead9;
+}
+.chip-hole {
+  background: rgba(138, 146, 156, 0.18);
+  border-color: #8a929c;
+  color: #d3d9df;
+}
+.chip-counterbore {
+  background: rgba(126, 107, 214, 0.2);
+  border-color: #7e6bd6;
+  color: #d8cffb;
+}
+.chip-countersink {
+  background: rgba(224, 138, 60, 0.18);
+  border-color: #e08a3c;
+  color: #f3d3a8;
+}
+.chip-custom {
+  background: rgba(47, 123, 246, 0.18);
+  border-color: var(--accent);
+  color: #cfe0ff;
+}
+
+button.chip-toggle {
+  cursor: pointer;
+  font: inherit;
+  line-height: inherit;
+}
+button.chip-toggle:hover {
+  filter: brightness(1.25);
+}
+
+/* ---- Hole grouping ---- */
+.hole-toolbar {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.hole-toolbar .btn.small {
+  flex: 1;
+  width: auto;
+  margin-top: 0;
+}
+
+.caret-btn {
+  flex-shrink: 0;
+  padding: 0 2px;
+  border: none;
+  background: none;
+  color: var(--subtle);
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.caret-btn:hover {
+  color: var(--text);
+}
+
+/* Holes shown as compact toggle pills (click to select for splitting). */
+.hole-rows {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px dashed var(--line);
+}
+
+.hole-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: var(--panel2);
+  color: var(--text);
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.hole-chip:hover {
+  border-color: #424b55;
+}
+
+.hole-chip.on {
+  border-color: var(--accent);
+  background: rgba(47, 123, 246, 0.18);
+  color: #cfe0ff;
+}
+
+.hole-chip-end {
+  font-size: 9px;
+  letter-spacing: 0.03em;
+  color: var(--subtle);
+}
+
+.hole-chip.on .hole-chip-end {
+  color: #9bc0ff;
+}
+
+.hole-split-row {
+  display: flex;
+  gap: 4px;
+  margin: 8px 0 4px;
+}
+
+.hole-split-row .btn.small {
+  width: auto;
+  margin-top: 0;
+  padding: 4px 9px;
+  font-size: 11px;
+}
+
+/* ---- Annotation list actions ---- */
+.subtle.hint {
+  margin: 0 0 8px;
+  font-size: 11px;
+}
+
+.ann-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.ann-actions .btn.danger {
+  flex: 1;
+  width: auto;
+  margin-top: 0;
+}
+
+/* "Delete all" is subdued until hovered, to discourage accidental clicks. */
+.btn.danger.ghost {
+  flex: 0 0 auto;
+  color: var(--subtle);
+  border-color: var(--line);
+  background: none;
+}
+
+.btn.danger.ghost:hover {
+  color: #fff;
+  border-color: #d9534f;
+  background: #d9534f;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: var(--accent);
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+  margin-left: 8px;
+}
+.link-btn:hover {
+  text-decoration: underline;
+}
+
+/* ---- GD&T panel ---- */
+.gdt-sub-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 8px 0 4px;
+}
+
+.gdt-datum-add {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.gdt-datum-input {
+  width: 32px;
+  padding: 3px 5px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--text);
+  font: inherit;
+  font-size: 12px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.gdt-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.gdt-list li {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 6px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  margin-bottom: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.gdt-list li:hover {
+  background: rgba(255,255,255,0.04);
+}
+
+.gdt-row-info {
+  flex: 1;
+  font-size: 11px;
+}
+
+/* Datum label badge: square box with letter. */
+.datum-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--text);
+  border-radius: 2px;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* FCF badge: symbol + tolerance in a pill-row. */
+.fcf-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 1px 5px;
+  font-size: 11px;
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  flex: 1;
+  min-width: 0;
+}
+
+.fcf-tol { color: var(--text); }
+.fcf-mod { color: var(--subtle); }
+.fcf-refs { color: var(--accent); font-weight: 600; }
+
+.gdt-form {
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 8px;
+  margin-bottom: 6px;
+}
+
+.gdt-form label {
+  display: block;
+  margin: 6px 0;
+  color: var(--subtle);
+  font-size: 12px;
+}
+
+.gdt-refs {
+  display: flex;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.gdt-refs select {
+  flex: 1;
+  padding: 4px 5px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--text);
+  font: inherit;
+  font-size: 12px;
+}
+
+ul.notes .tag {
+  display: inline-block;
+  background: var(--panel2);
+  border-radius: 4px;
+  padding: 1px 6px;
+  margin-right: 6px;
+  color: var(--subtle);
+  font-size: 12px;
+}
+
+/* ---- Floating hole table overlay (Model view only) ---- */
+.hole-table-overlay {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  z-index: 100;
+  background: rgba(21, 24, 28, 0.84);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  min-width: 260px;
+  max-width: 400px;
+  pointer-events: auto;
+  font-size: 12px;
+  overflow: hidden;
+}
+
+.hole-table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--line);
+  color: var(--subtle);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  user-select: none;
+}
+
+.hole-table-toggle {
+  background: none;
+  border: none;
+  color: var(--subtle);
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0 2px;
+  line-height: 1;
+}
+
+.hole-table-toggle:hover { color: var(--text); }
+
+.hole-table-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(51, 58, 66, 0.5);
+  color: var(--text);
+  border-left: 2px solid transparent;
+  transition: background 0.1s;
+}
+
+.hole-table-row:last-child { border-bottom: none; }
+
+.hole-table-row:hover { background: rgba(255, 255, 255, 0.06); }
+
+.hole-table-row.active { border-left-color: var(--accent); }
+
+.hole-table-swatch {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.hole-table-count {
+  color: var(--subtle);
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+.hole-table-dia {
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.hole-table-callout {
+  color: var(--subtle);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 11px;
+}

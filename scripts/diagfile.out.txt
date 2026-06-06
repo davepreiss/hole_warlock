@@ -1,0 +1,12 @@
+FILE: samples\demo.step
+size bytes: 73308
+first byte values: 73,83,79,45
+ISO-10303-21 => ISO-10303-21;
+FILE_SCHEMA => FILE_SCHEMA(('AUTOMOTIVE_DESIGN { 1 0 10303 214 1 1 1 1 }'));
+FILE_DESCRIPTION => FILE_DESCRIPTION(('Open CASCADE Model'),'2;
+FILE_NAME => FILE_NAME('Open CASCADE Shape Model','2026-06-04T10:02:22',('Author'),( 'Open CASCADE'),'Open CASCADE STEP processor 7.4','Open CASCADE 7.4' ,'Unknown');
+ReadFile status: 1 (1=Done 2=Error 3=Fail 4=Void)
+TransferRoots roots: 1
+OneShape IsNull: false
+face count: 23
+DONE

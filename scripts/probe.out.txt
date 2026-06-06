@@ -1,0 +1,28 @@
+matches /MakeBox/: ["BRepPrimAPI_MakeBox","BRepPrimAPI_MakeBox_1","BRepPrimAPI_MakeBox_2","BRepPrimAPI_MakeBox_3","BRepPrimAPI_MakeBox_4"]
+matches /ProgressRange/: []
+matches /MakeCylinder/: ["BRepPrimAPI_MakeCylinder","BRepPrimAPI_MakeCylinder_1","BRepPrimAPI_MakeCylinder_2","BRepPrimAPI_MakeCylinder_3","BRepPrimAPI_MakeCylinder_4","gce_MakeCylinder","gce_MakeCylinder_1","gce_MakeCylinder_2","gce_MakeCylinder_3","gce_MakeCylinder_4","gce_MakeCylinder_5","gce_MakeCylinder_6"]
+matches /STEPControl_Writer/: ["STEPControl_Writer","STEPControl_Writer_1","STEPControl_Writer_2"]
+matches /STEPControl_Reader/: ["STEPControl_Reader","STEPControl_Reader_1","STEPControl_Reader_2"]
+OK   MakeBox_1(60,40,10) => [object Object]
+OK   box.Shape() => [object Object]
+OK   new STEPControl_Writer_1() => [object Object]
+OK   Transfer(shape,mode,true) => [object Object]
+  transfer status raw = 1
+OK   Write("/box.step") => [object Object]
+  write status raw = 1
+OK   FS.readFile => ISO-10303-21;
+HEADER;
+FILE_DESCRIPTION(('Open CASCADE Model'),'2;1');
+FILE_NAME('Open CASC
+STEP length = 15416
+HEAD:
+ISO-10303-21;
+HEADER;
+FILE_DESCRIPTION(('Open CASCADE Model'),'2;1');
+FILE_NAME('Open CASCADE Shape Model','2026-06-03T23:20:45',('Author'),(
+    'Open CASCADE'),'Open CASCADE STEP processor 7.4','Open CASCADE 7.4'
+  ,'Unknown');
+FILE_SCHEMA(('AUTOMOTIVE_DESIGN { 1 0 10303 214 1 1 1 1 }'));
+ENDSEC;
+wrote samples/box.step
+DONE

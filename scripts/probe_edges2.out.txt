@@ -1,0 +1,5 @@
+total edges (with duplicates): 144
+by curve type: {"LINE":78,"CIRCLE":66}
+vertical straight lines (fillet tangents incl. box verticals): 36
+unique edges after dedup: 72
+DONE

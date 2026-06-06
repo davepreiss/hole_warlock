@@ -1,0 +1,17 @@
+GeomAbs_SurfaceType keys: ["values","GeomAbs_Plane","GeomAbs_Cylinder","GeomAbs_Cone","GeomAbs_Sphere","GeomAbs_Torus","GeomAbs_BezierSurface","GeomAbs_BSplineSurface","GeomAbs_SurfaceOfRevolution","GeomAbs_SurfaceOfExtrusion","GeomAbs_OffsetSurface","GeomAbs_OtherSurface"]
+typeof BRepAdaptor_Surface_2 = function
+typeof BRepAdaptor_Surface_3 = undefined
+typeof BRepClass3d_SolidClassifier_2 = function
+typeof TopAbs_State = function
+typeof gp_Cylinder = function
+face 1: CYL r=6.00 dia=12.00 Urange=1.57 Vrange=12.50 axis=(0.00,0.00,1.00) boss/in
+face 4: CYL r=6.00 dia=12.00 Urange=1.57 Vrange=12.50 axis=(0.00,0.00,1.00) boss/in
+face 10: CYL r=6.00 dia=12.00 Urange=1.57 Vrange=12.50 axis=(0.00,0.00,1.00) boss/in
+face 11: CYL r=6.00 dia=12.00 Urange=1.57 Vrange=12.50 axis=(0.00,0.00,1.00) boss/in
+face 13: CYL r=5.00 dia=10.00 Urange=6.28 Vrange=15.00 axis=(0.00,0.00,1.00) HOLE(out)
+face 14: CYL r=3.00 dia=6.00 Urange=6.28 Vrange=15.00 axis=(0.00,0.00,1.00) HOLE(out)
+face 15: CYL r=2.50 dia=5.00 Urange=6.28 Vrange=15.00 axis=(0.00,0.00,1.00) HOLE(out)
+face 16: CYL r=4.00 dia=8.00 Urange=6.28 Vrange=15.00 axis=(0.00,0.00,1.00) HOLE(out)
+face 17: CYL r=1.50 dia=3.00 Urange=6.28 Vrange=15.00 axis=(0.00,0.00,1.00) HOLE(out)
+type counts (enum->n): {"0":10,"1":9,"2":4}
+DONE

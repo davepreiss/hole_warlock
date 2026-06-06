@@ -1,0 +1,14 @@
+/Polygon3D/: ["BRep_Polygon3D","Handle_BRep_Polygon3D","Handle_BRep_Polygon3D_1","Handle_BRep_Polygon3D_2","Handle_BRep_Polygon3D_3","Handle_DrawTrSurf_Polygon3D","Handle_DrawTrSurf_Polygon3D_1","Handle_DrawTrSurf_Polygon3D_2"]
+/BRepAdaptor_Curve/: ["BRepAdaptor_Curve","BRepAdaptor_Curve2d","BRepAdaptor_Curve2d_1","BRepAdaptor_Curve2d_2","BRepAdaptor_Curve_1","BRepAdaptor_Curve_2","BRepAdaptor_Curve_3"]
+/GCPnts_TangentialDeflection/: ["GCPnts_TangentialDeflection","GCPnts_TangentialDeflection_1","GCPnts_TangentialDeflection_2","GCPnts_TangentialDeflection_3","GCPnts_TangentialDeflection_4","GCPnts_TangentialDeflection_5"]
+/GCPnts_UniformDeflection/: ["GCPnts_UniformDeflection","GCPnts_UniformDeflection_1","GCPnts_UniformDeflection_2","GCPnts_UniformDeflection_3","GCPnts_UniformDeflection_4","GCPnts_UniformDeflection_5"]
+edge occurrences: 24 with Polygon3D: 0
+OK   new BRepAdaptor_Curve_2(edge) => [object Object]
+OK   ad.FirstParameter() => 0
+OK   ad.LastParameter() => 10
+OK   GCPnts_TangentialDeflection_2(ad,0.3,0.3,2,1e-9,1e-7) => [object Object]
+OK   gc.NbPoints() => 2
+OK   gc.Value(1) => [object Object]
+   pt1: 0 0 0
+total edge segments for box: 24
+DONE

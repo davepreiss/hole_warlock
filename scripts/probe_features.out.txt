@@ -1,0 +1,12 @@
+axis groups with cyl/cone: 10
+axis 0|0|1|6|6|0 :: cyls[Ø12.00(in)/U1.57] cones[cone semi=45.0° refR=6.00 U1.57]
+axis 0|0|1|6|48|0 :: cyls[Ø12.00(in)/U1.57] cones[cone semi=45.0° refR=6.00 U1.57]
+axis 0|0|1|72|6|0 :: cyls[Ø12.00(in)/U1.57] cones[cone semi=45.0° refR=6.00 U1.57]
+axis 0|0|1|72|48|0 :: cyls[Ø12.00(in)/U1.57] cones[cone semi=45.0° refR=6.00 U1.57]
+axis 0|0|1|15|15|0 :: cyls[Ø3.30(out)/U6.28] cones[]
+axis 0|0|1|39|15|0 :: cyls[Ø5.20(out)/U6.28] cones[]
+axis 0|0|1|63|15|0 :: cyls[Ø4.50(out)/U6.28] cones[]
+axis 0|0|1|15|39|0 :: cyls[Ø5.50(out)/U6.28, Ø9.50(out)/U6.28] cones[]
+axis 0|0|1|39|39|0 :: cyls[Ø5.50(out)/U6.28] cones[cone semi=45.0° refR=2.75 U6.28]
+axis 0|0|1|63|39|0 :: cyls[Ø7.50(out)/U6.28] cones[]
+DONE

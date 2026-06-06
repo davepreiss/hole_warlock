@@ -1,0 +1,16 @@
+PASS starts with ISO-10303-21
+PASS has HEADER
+PASS has DATA section
+PASS contains our comment block
+PASS ends STEP cleanly
+PASS metadata recovered
+PASS material preserved
+PASS finish preserved
+PASS annotation preserved
+PASS annotation faceId preserved
+PASS re-embed does not duplicate block
+PASS OCCT read status == 1
+PASS shape not null
+PASS annotated file still has 6 faces (geometry intact)
+
+ALL PASS

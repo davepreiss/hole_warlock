@@ -1,0 +1,14 @@
+BRep_Tool IsClosed* keys: ["IsClosed_1","IsClosed_2","IsClosed_3","IsClosed_4"]
+  face#0 SEAM: (8.00,-0.00,0.00) -> (8.00,-0.00,20.00)
+  face#0 SEAM: (8.00,-0.00,0.00) -> (8.00,-0.00,20.00)
+  face#0: 2 seam edge(s)
+cylinder: 3 faces, 2 seam-edge occurrences
+
+  face#0 SEAM: (8.00,-0.00,0.00) -> (0.00,0.00,20.00)
+  face#0 SEAM: (8.00,-0.00,0.00) -> (0.00,0.00,20.00)
+  face#0: 2 seam edge(s)
+cone: 2 faces, 2 seam-edge occurrences
+
+box: 6 faces, 0 seam-edge occurrences
+
+DONE

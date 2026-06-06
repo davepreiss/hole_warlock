@@ -1,0 +1,30 @@
+# Netlify deployment config for the STEP Annotator (Vite + React SPA).
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  # Vite 8 needs a modern Node. Pin it so local and CI builds match.
+  NODE_VERSION = "22"
+
+# Long-cache the hashed, immutable build assets (JS/CSS/WASM all live here with a
+# content hash in the filename, so they can be cached forever and busted by name).
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Belt-and-suspenders: make sure the ~66 MB OpenCASCADE kernel is served as wasm.
+# (Netlify already does this by default, but the kernel won't instantiate without it.)
+[[headers]]
+  for = "/assets/*.wasm"
+  [headers.values]
+    Content-Type = "application/wasm"
+
+# SPA fallback. Harmless today (no client-side routing yet); static files such as
+# /demo.step and /assets/* always take precedence over this catch-all.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

@@ -1,0 +1,17 @@
+MakeCone variants: ["BRepPrimAPI_MakeCone","BRepPrimAPI_MakeCone_1","BRepPrimAPI_MakeCone_2","BRepPrimAPI_MakeCone_3","BRepPrimAPI_MakeCone_4"]
+OK   MakeBox
+OK   fillet vertical edges
+OK   chamfer top perimeter
+OK   hole d=2.5 @ (12.5,12.5)
+OK   hole d=2.5 @ (17.5,12.5)
+OK   hole d=2.5 @ (12.5,17.5)
+OK   hole d=2.5 @ (17.5,17.5)
+OK   hole d=5.2 @ (39,15)
+OK   hole d=4.5 @ (63,15)
+OK   hole d=7.5 @ (63,39)
+OK   counterbore
+OK   countersink
+OK   mesh
+OK   write STEP
+WROTE demo.step bytes: 95215
+DONE OK

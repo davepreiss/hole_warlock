@@ -1,0 +1,5 @@
+unique edges (edgeCount): 72
+total segments: 807
+vertical edge (x,y) locations: ["0,48","0,6","13.75,12.5","13.75,17.5","17.75,39","18.75,12.5","18.75,17.5","19.75,39","41.6,15","41.75,39","6,0","6,54","65.25,15","66.75,39","72,0","72,54","78,48","78,6"]
+expected fillet tangents present? ALL PRESENT
+DONE
